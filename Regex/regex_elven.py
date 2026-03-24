@@ -12,24 +12,27 @@ def parse(inputs):
     words_lists = inputs.split(",")
     return words_lists
 
-def accept(words_lists):
+def accept(test_list):
+    words_lists = parse(test_list)
     expression = r'^(c(or(on|marë)|(raban)|(ú)|(uivie)))$'
 
     for i in range (len(words_lists)):
         word = words_lists[i]
         if re.match(expression,word):
             print("The string: ", word ," is part of the elven language")
+            return True
         else:
             print("The string: ", word ," isn't part of the elven language")
+            return False
 
 def main():
     while True:
         test_list = input("Enter a word to see if it is part of the elven language: ")
         if not test_list:
             print("Empty word, obviously not part of the elven language")
-            break
+            return False
+        
+        accept(test_list)
 
-        words_list = parse(test_list)
-        accept(words_list)
-
-main()
+if __name__ == '__main__':
+    main()
