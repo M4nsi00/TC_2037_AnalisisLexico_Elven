@@ -49,17 +49,18 @@ final_state(qf).
 is_elven(Word) :-
  atom_chars(Word, List),
  start(S),
+ write(Word),
  parse_list(S, List).
 
 %Base Case 1, the list is empty and the current state is a final_state
 parse_list(State, []) :-
  final_state(State),
- write('Is part of the Elven Language'), nl.
+ write(': Is part of the Elven Language'), nl.
 
 %Base Case 2, the list is empty and the current state is NOT a final_state
 parse_list(State, []) :-
  \+ final_state(State),
- write('Is NOT a part of the Elven Language'), nl.
+ write(': Is NOT a part of the Elven Language'), nl.
 
 %Recursive Case
 parse_list(State, [H|T]):-
@@ -70,4 +71,4 @@ parse_list(State, [H|T]):-
 %NOT part of the language
 parse_list(State, [H|_]):-
  \+ transition(State,H,_),
- write('Is NOT a part of the Elven Language'), nl,!.
+ write(': Is NOT a part of the Elven Language'), nl,!.
